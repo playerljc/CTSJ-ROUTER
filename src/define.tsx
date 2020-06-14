@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 /**
  * IRouterConfig
@@ -13,7 +13,7 @@ export interface IRouteConfig {
   // 路径
   path: string;
   // Route的组件
-  component: React.ReactElement;
+  component?: React.ReactElement | null;
   // 重定向
   redirect?: string;
   // routes
@@ -26,5 +26,3 @@ export interface IRouteConfig {
 export interface RouteWithSubRoutesProps extends IRouteConfig {
   parentRoute?: IRouteConfig;
 }
-
-
