@@ -98,31 +98,52 @@ function renderSwitch(routes: IRouterConfig = [], parentRoute?: IRouteConfig) {
 /**
  * browserConfig
  * @param config
+ * @param insCallback
  * @return {*}
  */
-export function browserConfig(config: IRouterConfig) {
+export function browserConfig(config: IRouterConfig, insCallback) {
   sortRouters(config);
-  return <BrowserRouter>{renderSwitch(config)}</BrowserRouter>;
+  return <BrowserRouter
+    ref={(ins) => {
+      if (insCallback) {
+        insCallback(ins);
+      }
+    }}
+  >{renderSwitch(config)}</BrowserRouter>;
 }
 
 /**
  * hashConfig
  * @param config
+ * @param insCallback
  * @return {*}
  */
-export function hashConfig(config: IRouterConfig) {
+export function hashConfig(config: IRouterConfig, insCallback) {
   sortRouters(config);
-  return <HashRouter>{renderSwitch(config)}</HashRouter>;
+  return <HashRouter
+    ref={(ins) => {
+      if (insCallback) {
+        insCallback(ins);
+      }
+    }}
+  >{renderSwitch(config)}</HashRouter>;
 }
 
 /**
  * memoryConfig
  * @param config
+ * @param insCallback
  * @return {*}
  */
-export function memoryConfig(config: IRouterConfig) {
+export function memoryConfig(config: IRouterConfig, insCallback) {
   sortRouters(config);
-  return <MemoryRouter>{renderSwitch(config)}</MemoryRouter>;
+  return <MemoryRouter
+    ref={(ins) => {
+      if (insCallback) {
+        insCallback(ins);
+      }
+    }}
+  >{renderSwitch(config)}</MemoryRouter>;
 }
 
 export * from "history";
