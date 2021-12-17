@@ -1,0 +1,1 @@
+{"version":3,"file":"define.js","sources":["define.js"],"sourcesContent":["\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\n"],"names":["Object","defineProperty","exports","value"],"mappings":"aACAA,OAAOC,eAAeC,QAAS,aAAc,CAAEC,OAAO"}

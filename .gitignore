@@ -33,8 +33,6 @@ npm-debug
 
 .vscode
 
-lib
-
 yarn.lock
 
 **/.idea
