@@ -5,7 +5,8 @@ import {
   MemoryRouter,
   Route,
   Redirect,
-  Switch
+  Switch,
+  StaticRouter,
   // withRouter
 } from "react-router-dom";
 
@@ -144,6 +145,24 @@ export function memoryConfig(config: IRouterConfig, insCallback) {
       }
     }}
   >{renderSwitch(config)}</MemoryRouter>;
+}
+
+/**
+ *
+ * @param config
+ * @param props
+ * @param insCallback
+ */
+export function staticConfig(config: IRouterConfig, props: object = {}, insCallback) {
+  sortRouters(config);
+  return <StaticRouter
+      {...(props || {})}
+      ref={(ins) => {
+        if (insCallback) {
+          insCallback(ins);
+        }
+      }}
+  >{renderSwitch(config)}</StaticRouter>;
 }
 
 export * from "history";
