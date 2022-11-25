@@ -18,14 +18,14 @@ import { IRouteConfig, IRouterConfig, RouteWithSubRoutesProps } from './define';
  */
 function sortRouters(routes: IRouterConfig) {
   if (routes && routes.length) {
-    const index = routes.findIndex(r => r.path === '/');
+    const index = routes.findIndex((r) => r.path === '/');
     if (index !== -1) {
       const indexConfig = routes[index];
       routes[index] = routes[routes.length - 1];
       routes[routes.length - 1] = indexConfig;
     }
 
-    routes.forEach(route => {
+    routes.forEach((route) => {
       if (route.routes && route.routes.length) {
         sortRouters(route.routes);
       }
@@ -65,7 +65,7 @@ function RouteWithSubRoutes(route: RouteWithSubRoutesProps) {
         <Route
           path={path}
           exact={!!(parentRoute && path === '/')}
-          render={props => <RouteHOC {...props} route={route} />}
+          render={(props) => <RouteHOC {...props} route={route} />}
         />
       );
     } else if (path) {
@@ -88,7 +88,8 @@ function renderSwitch(routes: IRouterConfig = [], parentRoute?: IRouteConfig) {
   return (
     <Switch>
       {routes.map((route, i) => (
-        <RouteWithSubRoutes key={i} {...route} parentRoute={parentRoute} />
+        // @ts-ignore
+        <RouteWithSubRoutes {...route} key={`${i}`} parentRoute={parentRoute} />
       ))}
     </Switch>
   );
@@ -106,7 +107,7 @@ export function browserConfig(config: IRouterConfig, insCallback, props: any) {
   return (
     <BrowserRouter
       {...(props || {})}
-      ref={ins => {
+      ref={(ins) => {
         if (insCallback) {
           insCallback(ins);
         }
@@ -129,7 +130,7 @@ export function hashConfig(config: IRouterConfig, insCallback, props: any) {
   return (
     <HashRouter
       {...(props || {})}
-      ref={ins => {
+      ref={(ins) => {
         if (insCallback) {
           insCallback(ins);
         }
@@ -152,7 +153,7 @@ export function memoryConfig(config: IRouterConfig, insCallback, props: any) {
   return (
     <MemoryRouter
       {...(props || {})}
-      ref={ins => {
+      ref={(ins) => {
         if (insCallback) {
           insCallback(ins);
         }
@@ -174,7 +175,7 @@ export function staticConfig(config: IRouterConfig, props: object = {}, insCallb
   return (
     <StaticRouter
       {...(props || {})}
-      ref={ins => {
+      ref={(ins) => {
         if (insCallback) {
           insCallback(ins);
         }
