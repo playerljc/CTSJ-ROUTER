@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   BrowserRouter,
   HashRouter,
@@ -8,9 +8,9 @@ import {
   Switch,
   StaticRouter,
   // withRouter
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import { IRouteConfig, IRouterConfig, RouteWithSubRoutesProps } from "./define";
+import { IRouteConfig, IRouterConfig, RouteWithSubRoutesProps } from './define';
 
 /**
  * sortRouters
@@ -18,7 +18,7 @@ import { IRouteConfig, IRouterConfig, RouteWithSubRoutesProps } from "./define";
  */
 function sortRouters(routes: IRouterConfig) {
   if (routes && routes.length) {
-    const index = routes.findIndex(r => r.path === "/");
+    const index = routes.findIndex(r => r.path === '/');
     if (index !== -1) {
       const indexConfig = routes[index];
       routes[index] = routes[routes.length - 1];
@@ -57,16 +57,14 @@ function RouteWithSubRoutes(route: RouteWithSubRoutesProps) {
 
   if (redirect) {
     // 重定向
-    return (
-      <Redirect from={parentRoute ? parentRoute.path : "/"} to={redirect} />
-    );
+    return <Redirect from={parentRoute ? parentRoute.path : '/'} to={redirect} />;
   } else {
     // 带有孩子的Route
     if (routes && routes.length) {
       return (
         <Route
           path={path}
-          exact={!!(parentRoute && path === "/")}
+          exact={!!(parentRoute && path === '/')}
           render={props => <RouteHOC {...props} route={route} />}
         />
       );
@@ -104,47 +102,63 @@ function renderSwitch(routes: IRouterConfig = [], parentRoute?: IRouteConfig) {
  */
 export function browserConfig(config: IRouterConfig, insCallback) {
   sortRouters(config);
-  return <BrowserRouter
-    ref={(ins) => {
-      if (insCallback) {
-        insCallback(ins);
-      }
-    }}
-  >{renderSwitch(config)}</BrowserRouter>;
+  return (
+    <BrowserRouter
+      ref={ins => {
+        if (insCallback) {
+          insCallback(ins);
+        }
+      }}
+    >
+      {renderSwitch(config)}
+    </BrowserRouter>
+  );
 }
 
 /**
  * hashConfig
  * @param config
  * @param insCallback
+ * @param props
  * @return {*}
  */
-export function hashConfig(config: IRouterConfig, insCallback) {
+export function hashConfig(config: IRouterConfig, insCallback, props: any) {
   sortRouters(config);
-  return <HashRouter
-    ref={(ins) => {
-      if (insCallback) {
-        insCallback(ins);
-      }
-    }}
-  >{renderSwitch(config)}</HashRouter>;
+  return (
+    <HashRouter
+      {...(props || {})}
+      ref={ins => {
+        if (insCallback) {
+          insCallback(ins);
+        }
+      }}
+    >
+      {renderSwitch(config)}
+    </HashRouter>
+  );
 }
 
 /**
  * memoryConfig
  * @param config
  * @param insCallback
+ * @param props
  * @return {*}
  */
-export function memoryConfig(config: IRouterConfig, insCallback) {
+export function memoryConfig(config: IRouterConfig, insCallback, props: any) {
   sortRouters(config);
-  return <MemoryRouter
-    ref={(ins) => {
-      if (insCallback) {
-        insCallback(ins);
-      }
-    }}
-  >{renderSwitch(config)}</MemoryRouter>;
+  return (
+    <MemoryRouter
+      {...(props || {})}
+      ref={ins => {
+        if (insCallback) {
+          insCallback(ins);
+        }
+      }}
+    >
+      {renderSwitch(config)}
+    </MemoryRouter>
+  );
 }
 
 /**
@@ -155,15 +169,19 @@ export function memoryConfig(config: IRouterConfig, insCallback) {
  */
 export function staticConfig(config: IRouterConfig, props: object = {}, insCallback) {
   sortRouters(config);
-  return <StaticRouter
+  return (
+    <StaticRouter
       {...(props || {})}
-      ref={(ins) => {
+      ref={ins => {
         if (insCallback) {
           insCallback(ins);
         }
       }}
-  >{renderSwitch(config)}</StaticRouter>;
+    >
+      {renderSwitch(config)}
+    </StaticRouter>
+  );
 }
 
-export * from "history";
-export * from "react-router-dom";
+export * from 'history';
+export * from 'react-router-dom';

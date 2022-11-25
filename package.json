@@ -1,6 +1,6 @@
 {
   "name": "@ctsj/router",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "一个基于react-router的可配置路由",
   "main": "lib/index.js",
   "scripts": {
@@ -39,7 +39,9 @@
     "react-dom": "^16.8.6",
     "tslint": "^6.0.0",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.8.2"
+    "typescript": "^3.8.2",
+    "@umijs/fabric": "^2.8.1",
+    "eslint-plugin-unused-imports": "^2.0.0"
   },
   "dependencies": {
     "@types/react-router": "^5.1.5",

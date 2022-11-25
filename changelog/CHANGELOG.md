@@ -1,3 +1,11 @@
+# 1.0.4
+
+***
+
+2022-11-25
+
+* browserConfig和hashConfig加入props参数
+
 # 1.0.3
 
 ***
