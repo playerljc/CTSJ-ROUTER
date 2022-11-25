@@ -98,12 +98,14 @@ function renderSwitch(routes: IRouterConfig = [], parentRoute?: IRouteConfig) {
  * browserConfig
  * @param config
  * @param insCallback
+ * @param props
  * @return {*}
  */
-export function browserConfig(config: IRouterConfig, insCallback) {
+export function browserConfig(config: IRouterConfig, insCallback, props: any) {
   sortRouters(config);
   return (
     <BrowserRouter
+      {...(props || {})}
       ref={ins => {
         if (insCallback) {
           insCallback(ins);
